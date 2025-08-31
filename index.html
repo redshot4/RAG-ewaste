@@ -4,73 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Website Assistant</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
+            background-color: #f3f4f6;
         }
         .summary-btn {
-            background-color: #e2e8f0; /* Lighter gray */
-            color: #2464d2; /* Darker text */
-            border: 1px solid #e5bc96; /* Subtle border */
-            padding: 8px 16px;
+            background-color: #f9fafb;
+            color: #1f2937;
+            border: 1px solid #d1d5db;
+            padding: 8px 12px;
             border-radius: 9999px;
-            font-weight: 600; /* Bolder font weight */
+            font-weight: 500;
             transition: all 0.2s ease;
         }
         .summary-btn:hover {
-            background-color: #cfd8e3;
-        }
-        .ai-avatar {
-            background-color: #8b4cbf; /* Deeper blue for AI */
-        }
-        .user-avatar {
-            background-color: #3adb3a; /* Dark gray for user */
+            background-color: #e5e7eb;
         }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 sm:p-6">
-    <div class="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col h-[90vh]">
+    <div class="w-full max-w-lg mx-auto bg-white rounded-xl shadow-lg overflow-hidden flex flex-col h-[95vh]">
 
+        <!-- Main Content -->
         <div class="flex flex-col flex-grow overflow-hidden">
 
+            <!-- Chat Container -->
             <div class="w-full flex flex-col h-full overflow-hidden">
-                <div class="bg-indigo-700 text-white p-5 flex items-center justify-between shadow-md">
-                    <h1 class="text-2xl font-semibold">Website Assistant</h1>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                <!-- Chat Header -->
+                <div class="bg-blue-600 text-white p-4 flex items-center justify-between">
+                    <h1 class="text-xl font-bold">Website Assistant</h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
                     </svg>
                 </div>
 
-                <div class="p-6 bg-gray-50 border-b border-gray-200">
-                    <label for="file-upload" class="block text-sm font-semibold text-gray-700 mb-2">Provide RAG Context (.txt files only)</label>
+                <!-- File/Text Input Area -->
+                <div class="p-4 bg-gray-50 border-b border-gray-200">
+                    <label for="file-upload" class="block text-sm font-medium text-gray-700 mb-2">Provide your RAG Context (.txt files only)</label>
                     <input type="file" id="file-upload" accept=".txt" class="block w-full text-sm text-gray-500
                         file:mr-4 file:py-2 file:px-4
                         file:rounded-full file:border-0
                         file:text-sm file:font-semibold
-                        file:bg-indigo-50 file:text-indigo-700
-                        hover:file:bg-indigo-100 mb-3" />
-                    <textarea id="rag-context-textarea" rows="4" class="w-full p-4 border border-gray-300 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" placeholder="Or paste your text here..."></textarea>
+                        file:bg-blue-50 file:text-blue-700
+                        hover:file:bg-blue-100 mb-3" />
+                    <textarea id="rag-context-textarea" rows="4" class="w-full p-3 border border-gray-300 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Or paste your text here..."></textarea>
                 </div>
 
-                <div id="chat-messages" class="flex-grow p-6 overflow-y-auto space-y-6">
+                <!-- Chat Messages -->
+                <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-4">
+                    <!-- Initial welcome message from AI -->
                     <div class="flex items-start">
-                        <div class="flex-shrink-0 w-9 h-9 rounded-full ai-avatar flex items-center justify-center text-white font-bold text-sm">AI</div>
-                        <div class="ml-3 bg-gray-100 p-4 rounded-xl max-w-[80%] shadow-sm">
-                            <p class="text-sm text-gray-800">Hello! I am your RAG assistant. Provide a knowledge base above to start our conversation.</p>
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">AI</div>
+                        <div class="ml-3 bg-gray-200 p-3 rounded-xl max-w-[80%]">
+                            <p class="text-sm text-gray-800">Hello! I am your RAG assistant. Ask me anything about my knowledge base!</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-6 bg-gray-50 border-t border-gray-200">
-                    <div class="flex items-center justify-center mb-4">
+                <!-- User Input -->
+                <div class="p-4 bg-gray-50 border-t border-gray-200">
+                    <div class="flex items-center justify-center mb-2">
                         <button id="summary-button" class="summary-btn">✨ Summarize Conversation ✨</button>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <input id="user-input" type="text" placeholder="Ask a question about the context..." class="flex-grow p-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
-                        <button id="send-button" class="bg-indigo-600 text-white p-4 rounded-full hover:bg-indigo-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <div class="flex items-center space-x-2">
+                        <input id="user-input" type="text" placeholder="Type your message..." class="flex-grow p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button id="send-button" class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                                 <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.981.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405Z" />
                             </svg>
@@ -95,7 +97,9 @@
 
         fileUpload.addEventListener('change', (event) => {
             const file = event.target.files[0];
-            if (!file) return;
+            if (!file) {
+                return;
+            }
 
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -104,33 +108,28 @@
             reader.readAsText(file);
         });
 
-        /**
-         * Appends a message to the chat interface.
-         * @param {string} sender - 'user' or 'ai'.
-         * @param {string} text - The message text.
-         */
         function appendMessage(sender, text) {
             const messageContainer = document.createElement('div');
             messageContainer.classList.add('flex', 'items-start');
 
             const avatar = document.createElement('div');
-            avatar.classList.add('flex-shrink-0', 'w-9', 'h-9', 'rounded-full', 'flex', 'items-center', 'justify-center', 'font-bold', 'text-sm');
-            avatar.innerText = sender === 'user' ? 'You' : 'AI';
+            avatar.classList.add('flex-shrink-0', 'w-8', 'h-8', 'rounded-full', 'flex', 'items-center', 'justify-center', 'font-bold', 'text-sm');
 
             const messageBubble = document.createElement('div');
-            messageBubble.classList.add('p-4', 'rounded-xl', 'max-w-[80%]');
+            messageBubble.classList.add('p-3', 'rounded-xl', 'max-w-[80%]');
 
             if (sender === 'user') {
                 messageContainer.classList.add('justify-end');
-                avatar.classList.add('order-2', 'ml-3', 'user-avatar', 'text-white');
-                messageBubble.classList.add('order-1', 'bg-indigo-500', 'text-white');
+                avatar.classList.add('order-2', 'ml-3', 'bg-gray-400', 'text-white');
+                avatar.innerText = 'You';
+                messageBubble.classList.add('order-1', 'bg-blue-500', 'text-white');
             } else {
-                avatar.classList.add('ai-avatar', 'text-white');
-                messageBubble.classList.add('ml-3', 'bg-gray-100', 'text-gray-800', 'shadow-sm');
+                avatar.classList.add('bg-blue-500', 'text-white');
+                avatar.innerText = 'AI';
+                messageBubble.classList.add('ml-3', 'bg-gray-200', 'text-gray-800');
             }
 
-            // Using innerHTML to support markdown-like formatting if the AI provides it
-            messageBubble.innerHTML = `<p class="text-sm leading-relaxed">${text}</p>`;
+            messageBubble.innerHTML = `<p class="text-sm">${text}</p>`;
             messageContainer.appendChild(avatar);
             messageContainer.appendChild(messageBubble);
 
@@ -138,15 +137,12 @@
             chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to the bottom
         }
 
-        /**
-         * Sends a message to the Gemini API.
-         * @param {boolean} isSummaryRequest - True if this is a request to summarize the conversation.
-         */
         async function sendMessage(isSummaryRequest = false) {
             const userMessage = userInput.value.trim();
             const ragContext = ragContextTextarea.value.trim();
             if (userMessage === '' && !isSummaryRequest) return;
 
+            // Display user message if it's not a summary request
             if (!isSummaryRequest) {
                 appendMessage('user', userMessage);
                 userInput.value = '';
@@ -157,16 +153,19 @@
             loadingBubble.id = 'loading-indicator';
             loadingBubble.classList.add('flex', 'items-start');
             loadingBubble.innerHTML = `
-                <div class="flex-shrink-0 w-9 h-9 rounded-full ai-avatar flex items-center justify-center text-white font-bold text-sm">AI</div>
-                <div class="ml-3 bg-gray-100 p-4 rounded-xl max-w-[80%] animate-pulse shadow-sm">
-                    <div class="h-4 bg-gray-300 rounded w-2/3"></div>
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">AI</div>
+                <div class="ml-3 bg-gray-200 p-3 rounded-xl max-w-[80%] animate-pulse">
+                    <p class="text-sm">...</p>
                 </div>
             `;
             chatMessages.appendChild(loadingBubble);
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
             const chatHistory = getChatHistory();
-            let systemInstructionText = `You are an AI assistant specialized in a specific topic. You must ONLY answer questions based on the provided context. If a question is outside the context, politely state that you cannot answer.
+            let systemInstructionText = `You are an AI assistant. Your primary function is to answer questions.
+
+            - If the question is about the provided context: Answer in detail using only the information from the context.
+            - If the question is NOT about the provided context: Answer using your general knowledge, without referring to the provided context.
 
             Here is the context:
             ${ragContext}`;
@@ -174,6 +173,7 @@
             let finalUserMessage = userMessage;
 
             if (isSummaryRequest) {
+                // For a summary request, we change the system instruction and the user message
                 systemInstructionText = `You are a conversation summarizer. Provide a concise, single-paragraph summary of the following chat history.`;
                 finalUserMessage = chatHistory.map(m => m.role === 'user' ? `User: ${m.parts[0].text}` : `AI: ${m.parts[0].text}`).join('\n');
             }
@@ -217,20 +217,17 @@
             }
         }
 
-        /**
-         * Retrieves the current chat history from the DOM.
-         * @returns {Array<Object>} An array of messages in the chat.
-         */
         function getChatHistory() {
             const messages = [];
             const messageElements = chatMessages.querySelectorAll('.flex.items-start');
             
+            // The first message is the welcome message, which we don't want to include in the conversation history
             for (let i = 1; i < messageElements.length; i++) {
                 const element = messageElements[i];
                 const sender = element.querySelector('.order-2') ? 'user' : 'model';
                 const text = element.querySelector('p').textContent;
                 if (text !== '...') { // Exclude the loading indicator
-                    messages.push({
+                     messages.push({
                         role: sender === 'user' ? 'user' : 'model',
                         parts: [{
                             text: text
