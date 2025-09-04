@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>E-Waste Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #222;
+      --nav-bg: #044c3a;
+      --footer-bg: #007965;
+      --btn-bg: #007965;
+      --btn-text: #ffffff;
+      --card-title: #007965;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      background: var(--bg-color);
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+    #particles-js {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0; background: #f8fff8;
+    }
+    header, nav, .hero, .categories, footer { position: relative; z-index: 2; }
+    header { background-color: var(--nav-bg); color: white; padding: 20px 10px; text-align: center; }
+    .header-title-container { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 20px; }
+    .header-title-container img.left-img{ width:250px; }
+    .header-title-container img.right-img { width: 175px; }
+    .header-title-container h1 {
+      font-size: 36px; color: #3cd070; text-shadow: 1px 1px 0 #a0f0c0; margin: 0 20px; text-align: center;
+    }
+    nav { background: var(--footer-bg); padding: 12px 0; text-align: center; }
+    nav a { color:#fff; text-decoration:none; margin:8px 12px; font-size:17px; font-weight:600; position:relative; }
+    nav a::after { content:''; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:#ffeb3b; transition:0.3s; }
+    nav a:hover::after { width:100%; }
+    .hero { text-align:center; padding:60px 20px; background:rgba(255,255,255,0.9); margin:30px 10px; border-radius:18px; box-shadow:0 8px 24px rgba(0,0,0,0.1);}
+    .hero h2 { font-size:30px; margin-bottom:16px; color:#007965; }
+    .hero p { font-size:16px; max-width:800px; margin:0 auto 25px; }
+    .hero .buttons a { display:inline-block; margin:10px 8px; padding:12px 24px; background:var(--btn-bg); color:var(--btn-text); border-radius:25px; font-weight:600; font-size:15px; transition:0.3s; }
+    .hero .buttons a:hover { background:#005e4c; transform:scale(1.05); }
+    .categories { display:flex; justify-content:center; gap:30px; flex-wrap:wrap; padding:50px 10px; }
+    .cat { background:#fff; border-radius:18px; box-shadow:0 6px 18px rgba(0,0,0,0.1); text-align:center; width:220px; padding:25px 18px; transition:0.3s; }
+    .cat:hover { transform:translateY(-8px) scale(1.04); }
+    .cat h3 { color:var(--card-title); font-size:20px; margin-bottom:10px; }
+    footer { background:var(--footer-bg); color:#fff; text-align:center; padding:16px; margin-top:60px; }
+    
+    /* Styles for the new chatbot's summarize button */
+    .summary-btn {
+        background: linear-gradient(to right, #6d28d9, #be185d);
+        color: white; padding: 8px 16px; border-radius: 9999px;
+        border: none; cursor: pointer; font-weight: 600;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease-in-out;
+    }
+    .summary-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<header>
+  <div class="header-title-container">
+    <img src="assets/left-icon.png" alt="Left Icon" class="left-img">
+    <h1>E-Waste Management System</h1>
+    <img src="assets/right-icon.png" alt="Right Icon" class="right-img">
+  </div>
+</header>
+
+<nav>
+  <a href="main.html"><i class="fas fa-home"></i> Home</a>
+  <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+  <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+</nav>
+
+<section class="hero" data-aos="fade-up">
+  <h2>Recycle Today, Protect Tomorrow</h2>
+  <p>Join our mission to reduce electronic waste. Identify, manage, and dispose of unused electronics responsibly. Every device recycled is a step toward a cleaner future.</p>
+  <div class="buttons">
+    <a href="admin_login.html"><i class="fas fa-recycle"></i> Admin Dashboard</a>
+    <a href="dataengineer_login.html"><i class="fas fa-user-plus"></i> Data Engineer</a>
+ </div>
+</section>
+
+<section class="categories">
+  <div class="cat" data-aos="fade-up">
+    <h3>Reusable</h3>
+    <p>Fully functional electronics ready for reuse or donation.</p>
+  </div>
+  <div class="cat" data-aos="fade-up" data-aos-delay="100">
+    <h3>Refurbishable</h3>
+    <p>Devices requiring minor repairs to be returned to working condition.</p>
+  </div>
+  <div class="cat" data-aos="fade-up" data-aos-delay="200">
+    <h3>Disposable</h3>
+    <p>End-of-life electronics safely processed for disposal or recycling.</p>
+  </div>
+</section>
+
+<a href="main.html" title="Go to Main Index" class="fixed bottom-24 right-5 w-16 h-16 bg-blue-600 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-blue-700 transition-colors z-50">
+        <i class="fas fa-home text-2xl"></i>
+    </a>
+
+<button id="chat-icon-button" class="fixed bottom-5 right-5 w-16 h-16 bg-pink-600 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-pink-700 transition-colors z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+</button>
+<div id="chat-widget-container" class="hidden fixed bottom-24 right-5 w-full max-w-md mx-auto bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col h-[70vh] z-40">
+    <div class="flex flex-col flex-grow overflow-hidden">
+        <div class="w-full flex flex-col h-full overflow-hidden">
+            <div class="bg-blue-600 text-white p-4 flex items-center justify-between">
+                <h1 class="text-xl font-bold">Website Assistant</h1>
+                <button id="close-chat-button" class="text-white hover:bg-blue-700 rounded-full p-1"><svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg></button>
+            </div>
+            <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-4 bg-gray-100">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">AI</div>
+                    <div class="ml-3 bg-white p-3 rounded-xl max-w-[80%] shadow-sm"><p class="text-sm text-gray-800">Hello! I am your assistant. How can I help you today?</p></div>
+                </div>
+            </div>
+            <div class="p-4 bg-gray-50 border-t border-gray-200">
+                <div class="flex items-center justify-center mb-2"><button id="summary-button" class="summary-btn">✨ Summarize Conversation ✨</button></div>
+                <div class="flex items-center space-x-2">
+                    <input id="user-input" type="text" placeholder="Type your message..." class="flex-grow p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button id="send-button" class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.981.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405Z" /></svg></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+  &copy; 2025 E-Waste Management System | developed by CS department.
+</footer>
+
+<script src="chatbot.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', initializeChatbot);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+particlesJS("particles-js", {particles:{number:{value:60},color:{value:"#00b894"},shape:{type:"circle"},opacity:{value:0.3},size:{value:3},line_linked:{enable:true,distance:150,color:"#00b894",opacity:0.2,width:1},move:{enable:true,speed:2}},interactivity:{events:{onhover:{enable:true,mode:"grab"},onclick:{enable:true,mode:"push"}},modes:{grab:{distance:200,line_linked:{opacity:0.3}},push:{particles_nb:2}}},retina_detect:true});
+</script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>AOS.init({ duration: 1000, once: true });</script>
+
+</body>
+</html>
