@@ -1,82 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>Product Engineer Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* 🔮 Gradient Background Animation */
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1abc9c, #16a085);
+      background: linear-gradient(-45deg, #00b894, #0984e3, #6c5ce7, #d63031);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0;
+      font-family: 'Poppins', sans-serif;
     }
-    .login-box {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
-      width: 320px;
-      text-align: center;
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    .login-box h2 {
-      margin-bottom: 20px;
-      color: #16a085;
-    }
-    input {
+
+    /* 🌟 Glassmorphism Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      padding: 2rem;
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      outline: none;
+      max-width: 380px;
     }
-    input:focus {
-      border-color: #16a085;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
+
+    .input-field {
+      background: rgba(255, 255, 255, 0.2);
       border: none;
+      outline: none;
+      padding: 12px;
       border-radius: 8px;
-      background: #16a085;
+      width: 100%;
       color: white;
-      font-size: 16px;
-      cursor: pointer;
+      font-size: 15px;
     }
-    button:hover {
-      background: #149174;
+    .input-field::placeholder {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .login-btn {
+      background: linear-gradient(45deg, #00cec9, #0984e3);
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .login-btn:hover {
+      background: linear-gradient(45deg, #0984e3, #6c5ce7);
+      transform: translateY(-2px);
     }
   </style>
 </head>
 <body>
-  <div class="login-box">
-    <h2>🔐 Product Engineer Login</h2>
-    <form onsubmit="return validateLogin(event)">
-      <input type="text" id="username" placeholder="👤 Username" required>
-      <input type="password" id="password" placeholder="🔒 Password" required>
-      <button type="submit">Login</button>
-    </form>
-    <p id="error" style="color:red; margin-top:10px;"></p>
-  </div>
+  <!-- 🌟 Glass Login Card -->
+<div class="glass-card text-center">
+  <h1 class="text-2xl font-bold text-white mb-6">🔐 Product Engineer Login</h1>
+  
+  <form id="loginForm" class="space-y-4">
+    <input type="email" id="email" placeholder="📧 Email" class="input-field" required />
+    <input type="password" id="password" placeholder="🔑 Password" class="input-field" required />
+    <button type="submit" class="login-btn">Login</button>
+  </form>
 
-  <script>
-    function validateLogin(event) {
-      event.preventDefault();
-      let user = document.getElementById("username").value;
-      let pass = document.getElementById("password").value;
+  <p id="errorMsg" class="text-red-300 text-sm mt-3 hidden"></p>
 
-      // Dummy validation (change with real backend later)
-      if (user === "admin" && pass === "admin123") {
-        alert("✅ Login Successful!");
-        window.location.href = "dataengineer.html"; // redirect
+  <!-- 🏠 Home Button -->
+  <a href="index.html" 
+     class="block mt-5 bg-gradient-to-r from-green-400 to-blue-500 text-white py-2 rounded-lg font-semibold transition hover:from-blue-500 hover:to-purple-500">
+    🏠 Back to Home
+  </a>
+</div>
+
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword 
+  } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+  import { 
+    getDatabase, 
+    ref, 
+    set, 
+    get, 
+    child 
+  } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+
+  // ✅ Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyC_Q7n0l6MEI3ySJCLra6xl5oSc9_Pwuzc",
+    authDomain: "ewaste-bafdd.firebaseapp.com",
+    databaseURL: "https://ewaste-bafdd-default-rtdb.firebaseio.com",
+    projectId: "ewaste-bafdd",
+    storageBucket: "ewaste-bafdd.firebasestorage.app",
+    messagingSenderId: "725818718552",
+    appId: "1:725818718552:web:cdc26b05044ba3a5ad4d2d",
+    measurementId: "G-LG05FY3PRD"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+
+  const loginForm = document.getElementById("loginForm");
+  const errorMsg = document.getElementById("errorMsg");
+
+  // ✅ Handle login or auto-register
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    try {
+      // 🔑 Try sign in
+      const userCred = await signInWithEmailAndPassword(auth, email, password);
+      await checkRole(userCred.user.uid);
+    } catch (error) {
+      if (error.code === "auth/user-not-found") {
+        try {
+          // 🆕 Auto create user
+          const newUser = await createUserWithEmailAndPassword(auth, email, password);
+          const userId = newUser.user.uid;
+
+          // Assign default role "engineer"
+          await set(ref(db, "roles/" + userId), "engineer");
+
+          // Check role after registration
+          await checkRole(userId);
+        } catch (signupError) {
+          errorMsg.textContent = "❌ " + signupError.message;
+          errorMsg.classList.remove("hidden");
+        }
       } else {
-        document.getElementById("error").innerText = "❌ Invalid credentials!";
+        errorMsg.textContent = "❌ " + error.message;
+        errorMsg.classList.remove("hidden");
       }
     }
-  </script>
+  });
+
+  // ✅ Check if user has engineer role
+  async function checkRole(userId) {
+    const snap = await get(child(ref(db), "roles/" + userId));
+    console.log("UID:", userId, "Role:", snap.val()); // Debug log
+    if (snap.exists() && snap.val() === "engineer") {
+      window.location.href = "dataengineer1.html";
+    } else {
+      errorMsg.textContent = "❌ You are not authorized as Product Engineer.";
+      errorMsg.classList.remove("hidden");
+    }
+  }
+</script>
+
 </body>
 </html>
